@@ -12,5 +12,10 @@ class Company extends Model
         return $this->hasMany(Employe::class);
     }
 
+    public function invitations()
+    {
+        return $this->hasMany(Invitation::class)->where('isCanceled', 0);
+    }
+
     use HasFactory;
 }

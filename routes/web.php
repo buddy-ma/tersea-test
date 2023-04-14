@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\CompanyController;
+use App\Http\Controllers\Admin\InvitationController;
 use App\Http\Controllers\Admin\StatisticsController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Auth\LoginController;
@@ -32,12 +33,27 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth:web']], function () {
 
     Route::prefix('companies')->group(function () {
         Route::get('/', [CompanyController::class, 'list'])->name('company-list');
+        Route::get('/{id?}', [CompanyController::class, 'show'])->name('show-company');
         Route::get('/add', [CompanyController::class, 'add'])->name('show-company-add');
         Route::post('/add', [CompanyController::class, 'store'])->name('company-add');
         Route::get('/edit/{id?}', [CompanyController::class, 'edit'])->name('show-company-edit');
         Route::post('/{id?}', [CompanyController::class, 'update'])->name('company-update');
         Route::delete('/delete/{id?}', [CompanyController::class, 'delete'])->name('company-delete');
     });
+
+    Route::prefix('invitation')->group(function () {
+        Route::get('/', [InvitationController::class, 'list'])->name('invitation-list');
+        Route::post('/add', [InvitationController::class, 'store'])->name('invitation-add');
+        Route::get('/close/{id?}', [InvitationController::class, 'close'])->name('invitation-close');
+    });
+
+    
+
+
+    // Route::prefix('employes')->group(function () {
+    //     Route::post('/{id?}', [InvitationController::class, 'update'])->name('employe-update');
+    //     Route::delete('/delete/{id?}', [InvitationController::class, 'delete'])->name('employe-delete');
+    // });
 });
 
 Route::group(['prefix' => 'admin'], function () {

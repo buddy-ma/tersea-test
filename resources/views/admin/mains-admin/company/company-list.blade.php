@@ -48,10 +48,13 @@
                                         <td>{{ $company->address }}</td>
                                         <td>{{ count($company->employes) }}</td>
                                         <td>
+                                            <a href="{{ route('show-company', $company->id) }}"
+                                                class="btn btn-success mb-2">Browse</a>
                                             <a href="{{ route('show-company-edit', $company->id) }}"
                                                 class="btn btn-primary mb-2">Edit</a>
                                             @if (count($company->employes) == 0)
-                                                <form action="{{ route('company-delete', [$company->id]) }}" method="post">
+                                                <form action="{{ route('company-delete', [$company->id]) }}"
+                                                    method="post">
                                                     @method('delete')
                                                     @csrf
 

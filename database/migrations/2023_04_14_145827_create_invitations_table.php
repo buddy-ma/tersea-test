@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->foreignId('company_id')->constrained();
             $table->string('title');
-            $table->string('link');
             $table->string('email')->unique();
             $table->tinyInteger('isOpen')->default(0);
             $table->tinyInteger('isCanceled')->default(0);

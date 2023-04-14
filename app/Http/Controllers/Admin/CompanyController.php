@@ -46,6 +46,12 @@ class CompanyController extends Controller
         return redirect('admin/companies'); 
     }
 
+    public function show($id)
+    {
+        $company = Company::find($id);
+        return view('admin.mains-admin.company.company-show', ['company' => $company]);
+    }
+
     public function edit($id)
     {
         $company = Company::find($id);
