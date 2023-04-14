@@ -30,12 +30,10 @@
                 <div class="col-12 mb-3">
                     <div class="e-panel card">
                         <div class="card-body">
-                            @can('user-create')
-                                <a href="{{ route('user-add') }}">
-                                    <button type="button" class="btn btn-primary"><i class="fe fe-plus mr-2"></i>Add
-                                        User</button>
-                                </a>
-                            @endcan
+                            <a href="{{ route('user-add') }}">
+                                <button type="button" class="btn btn-primary"><i class="fe fe-plus mr-2"></i>Add
+                                    User</button>
+                            </a>
                             <div class="e-table">
                                 <div class="table-responsive table-lg mt-3">
                                     <table

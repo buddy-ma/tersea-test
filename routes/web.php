@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\CompanyController;
 use App\Http\Controllers\Admin\StatisticsController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Auth\LoginController;
@@ -30,9 +31,12 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth:web']], function () {
     });
 
     Route::prefix('companies')->group(function () {
-        Route::get('/', [ProductController::class, 'list'])->name('company-list');
-        Route::get('/add', [ProductController::class, 'add'])->name('show-company-add');
-        Route::get('/edit/{id?}', [ProductController::class, 'edit'])->name('show-company-edit');
+        Route::get('/', [CompanyController::class, 'list'])->name('company-list');
+        Route::get('/add', [CompanyController::class, 'add'])->name('show-company-add');
+        Route::post('/add', [CompanyController::class, 'store'])->name('company-add');
+        Route::get('/edit/{id?}', [CompanyController::class, 'edit'])->name('show-company-edit');
+        Route::post('/{id?}', [CompanyController::class, 'update'])->name('company-update');
+        Route::delete('/delete/{id?}', [CompanyController::class, 'delete'])->name('company-delete');
     });
 });
 

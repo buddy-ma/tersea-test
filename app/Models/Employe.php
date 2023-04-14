@@ -14,4 +14,9 @@ class Employe extends Authenticatable
     protected $fillable = [
         'company_id','fullname','email', 'phone','address','date_naissance','password' ,'status','isFirstTime'
     ];
+
+    public function company()
+    {
+        return $this->belongsTo(Company::class, 'company_id');
+    }
 }
