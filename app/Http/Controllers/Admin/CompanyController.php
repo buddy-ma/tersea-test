@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Company;
+use App\Models\History;
 use App\Rules\PhoneValidation;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CompanyController extends Controller
 {
@@ -35,7 +37,11 @@ class CompanyController extends Controller
         $company->phone = $request->input('phone');
         $company->address = $request->input('address');
         $company->save();
-
+        History::create([
+            'user_id' => Auth::guard('web')->id(),
+            'action' => 'a ajouté la societe '.$company->title,
+            'link' => '/admin/companies'
+        ]);
         session()->flash('success','Company has been added successfully');
         return redirect('admin/companies'); 
     }
@@ -61,7 +67,11 @@ class CompanyController extends Controller
         $company->phone = $request->input('phone');
         $company->address = $request->input('address');
         $company->save();
-
+        History::create([
+            'user_id' => Auth::guard('web')->id(),
+            'action' => 'a modifier la societe '.$company->title,
+            'link' => '/admin/companies'
+        ]);
         session()->flash('success','Company has been updated successfully');
         return redirect('admin/companies'); 
     }
@@ -73,6 +83,11 @@ class CompanyController extends Controller
             return back()->with('error', 'Company has Employes still');
         }
         $company->delete();
+        History::create([
+            'user_id' => Auth::guard('web')->id(),
+            'action' => 'a supprimé la societe '.$company->title,
+            'link' => '/admin/companies'
+        ]);
         session()->flash('success', 'Company has been deleted sucssefuly');
         return redirect('admin/companies');
     }
