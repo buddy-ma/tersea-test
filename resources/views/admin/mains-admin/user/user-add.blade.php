@@ -32,25 +32,26 @@
                 <div class="card-header">
                     <h3 class="card-title">Add User </h3>
                 </div>
-                <div class="card-body pb-2">
-                    @if ($message = Session::get('success'))
-                        <div class="alert alert-success" role="alert"><button type="button" class="close"
-                                data-dismiss="alert" aria-hidden="true">×</button>
-                            <i class="fa fa-check-circle-o mr-2" aria-hidden="true"></i>{{ $message }}.
-                        </div>
-                    @endif
-                    @if (count($errors) > 0)
-                        <div class="alert alert-danger">
-                            <strong>Whoops!</strong> There were some problems with your input.
-                            <ul>
-                                @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    @endif
-                    <form action="{{ route('user-add') }}" method='POST' role="form" enctype="multipart/form-data">
-                        @csrf
+                <form action="{{ route('user-add') }}" method='POST' role="form" enctype="multipart/form-data">
+                    @csrf
+                    <div class="card-body pb-2">
+                        @if ($message = Session::get('success'))
+                            <div class="alert alert-success" role="alert"><button type="button" class="close"
+                                    data-dismiss="alert" aria-hidden="true">×</button>
+                                <i class="fa fa-check-circle-o mr-2" aria-hidden="true"></i>{{ $message }}.
+                            </div>
+                        @endif
+                        @if (count($errors) > 0)
+                            <div class="alert alert-danger">
+                                <strong>Whoops!</strong> There were some problems with your input.
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
+
                         <div class="expanel expanel-default">
                             <div class="expanel-heading">
                                 <h3 class="expanel-title" style="text-align: center">User Personal Information &nbsp
@@ -60,47 +61,19 @@
                             <div class="expanel-body">
                                 <div class="row row-sm">
                                     <div class="col-lg">
-                                        <label class="col-md-12 form-label">First Name</label>
-                                        <input class="form-control mb-4" placeholder="First Name" type="text"
-                                            name='firstname' value='{{ old('firstname') }}'>
+                                        <label class="col-md-12 form-label">Fullname</label>
+                                        <input class="form-control mb-4" placeholder="Fullname" type="text"
+                                            name='fullname' value='{{ old('fullname') }}'>
                                     </div>
-                                    <div class="col-lg">
-                                        <label class="col-md-12 form-label">Last Name</label>
-                                        <input class="form-control mb-4" placeholder="Last Name" type="text"
-                                            name='lastname' value='{{ old('lastname') }}'>
-                                    </div>
+
                                     <div class="col-lg">
                                         <label class="col-md-12 form-label">Email</label>
                                         <input class="form-control mb-4" placeholder="Email" type="text" name='email'
                                             value='{{ old('email') }}'>
                                     </div>
-                                    <div class="col-lg">
-                                        <label class="col-md-12 form-label">User Name</label>
-                                        <input class="form-control mb-4" placeholder="User Name" type="text"
-                                            name='display_name' value='{{ old('display_name') }}'>
-                                    </div>
                                 </div>
 
                                 <div class="row row-sm">
-
-                                    <div class="col-lg">
-                                        <label class="col-md-12 form-label">Phone </label>
-                                        <input class="form-control mb-4" placeholder="Phone" type="text" name='phone'
-                                            value='{{ old('phone') }}'>
-                                    </div>
-
-                                    <div class="col-lg">
-                                        <label class="col-md-12 form-label">Roles</label>
-                                        <div class="col-md-12">
-                                            <select multiple="multiple"
-                                                onchange="console.log($(this).children(':selected').length)"
-                                                class="search-box" name="roles[]">
-                                                @foreach ($roles as $role)
-                                                    <option value="{{ $role }}">{{ $role }}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                    </div>
                                     <div class="col-lg">
                                         <label class="col-md-12 form-label">Password </label>
                                         <input class="form-control mb-4" placeholder="Password" type="password"
@@ -115,11 +88,11 @@
                             </div>
                         </div>
 
-                        <div>
-                            <input type="submit" value="Save" name="action" class="btn btn-primary mt-4 mb-0">
-                        </div>
-                    </form>
-                </div>
+                    </div>
+                    <div class="card-footer">
+                        <input type="submit" value="Save" name="action" class="btn btn-primary mt-4 mb-0">
+                    </div>
+                </form>
             </div>
         </div>
     </div>

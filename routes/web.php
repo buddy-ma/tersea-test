@@ -23,9 +23,17 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth:web']], function () {
     Route::get('/dashboard', [StatisticsController::class, 'Dashboard'])->name('dashboard');
     
     //admins
-    Route::get('/admin', [UserController::class, 'User'])->name('user-list');
-    Route::get('/user/add', [UserController::class, 'ShowAddUser'])->name('show-user-add');
-    Route::post('/user/add', [UserController::class, 'UserAdd'])->name('user-add');
+    Route::prefix('admins')->group(function () {
+        Route::get('/', [UserController::class, 'User'])->name('user-list');
+        Route::get('/add', [UserController::class, 'ShowAddUser'])->name('show-user-add');
+        Route::post('/add', [UserController::class, 'UserAdd'])->name('user-add');
+    });
+
+    Route::prefix('companies')->group(function () {
+        Route::get('/', [ProductController::class, 'list'])->name('company-list');
+        Route::get('/add', [ProductController::class, 'add'])->name('show-company-add');
+        Route::get('/edit/{id?}', [ProductController::class, 'edit'])->name('show-company-edit');
+    });
 });
 
 Route::group(['prefix' => 'admin'], function () {

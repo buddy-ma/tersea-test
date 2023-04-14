@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\History;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
@@ -38,14 +40,19 @@ class UserController extends Controller
         ]);
 
         //history
+        History::create([
+            'user_id' => Auth::guard('web')->id(),
+            'action' => 'a ajouté l\'administrateur '.$user->name,
+            'link' => '/admin/admins'
+        ]);
 
-        return Redirect::to("admin/user")->with('success', 'The record has been added successfully');
+        return Redirect::to("admin/admins")->with('success', 'The record has been added successfully');
     }
 
     public function RulesAdd()
     {
         $rules = array(
-            'name' => 'required|string|max:255',
+            'fullname' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
         );
@@ -56,7 +63,7 @@ class UserController extends Controller
     public function AttributeNames()
     {
         $attributeNames = array(
-            'name' => 'fullname',
+            'fullname' => 'fullname',
             'email' => "email",
             'password' => "password",
         );
