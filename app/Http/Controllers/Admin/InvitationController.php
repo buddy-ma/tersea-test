@@ -10,6 +10,12 @@ use Illuminate\Support\Facades\Auth;
 
 class InvitationController extends Controller
 {
+    public function list()
+    {
+        $invitations = Invitation::get();
+        return view('admin.mains-admin.invitation.invitation-list', ['invitations' => $invitations]);
+    }
+
     public function store(Request $request)
     {
         $request->validate([
@@ -24,11 +30,11 @@ class InvitationController extends Controller
         $invitation->save();
         History::create([
             'user_id' => Auth::guard('web')->id(),
-            'action' => 'a ajouté une invitation '. $invitation->title .' a la societe '.$invitation->company->title,
-            'link' => '/admin/companies/'.$request->input('company_id')
+            'action' => 'a invite l\'employe ' . $invitation->title . ' a la societe ' . $invitation->company->title,
+            'link' => '/admin/companies/show/' . $request->input('company_id')
         ]);
-        session()->flash('success','Invitation has been sent successfully');
-        return redirect('admin/companies/'.$request->input('company_id')); 
+        session()->flash('success', 'Invitation has been sent successfully');
+        return redirect('admin/companies/show/' . $request->input('company_id'));
     }
 
     public function close($id)
@@ -38,10 +44,24 @@ class InvitationController extends Controller
         $invitation->save();
         History::create([
             'user_id' => Auth::guard('web')->id(),
-            'action' => 'a annulé l\'invitation '. $invitation->title,
+            'action' => 'a annulé l\'invitation ' . $invitation->title,
             'link' => '/admin/invitations'
         ]);
-        session()->flash('success','Employe has been added successfully');
-        return redirect('admin/invitations'); 
+        session()->flash('success', 'Invitation anullée avec success');
+        return redirect('admin/invitations');
+    }
+
+    public function open($id)
+    {
+        $invitation = Invitation::find($id);
+        $invitation->isCanceled = 0;
+        $invitation->save();
+        History::create([
+            'user_id' => Auth::guard('web')->id(),
+            'action' => 'a réactiver l\'invitation ' . $invitation->title,
+            'link' => '/admin/invitations'
+        ]);
+        session()->flash('success', 'Invitation réactivée avec success');
+        return redirect('admin/invitations');
     }
 }

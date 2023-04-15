@@ -33,68 +33,99 @@
 
 @section('content')
     <div class="row mt-3">
-        <div class="col-lg-12 col-md-12">
+        <div class="col-3">
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title">Update Company </h3>
+                    <div class="card-title">{{ $company->title }}</div>
                 </div>
-                <form action="{{ route('company-update', [$company->id]) }}" method='POST' role="form"
-                    enctype="multipart/form-data">
-                    @csrf
-                    <div class="card-body pb-2">
-                        @if ($message = Session::get('success'))
-                            <div class="alert alert-success" role="alert"><button type="button" class="close"
-                                    data-dismiss="alert" aria-hidden="true">×</button>
-                                <i class="fa fa-check-circle-o mr-2" aria-hidden="true"></i>{{ $message }}.
+                <div class="card-body">
+                    <div class="main-profile-contact-list">
+                        <div class="media mr-4 mt-0">
+                            <div class="media-icon bg-primary text-white mr-3 mt-1">
+                                <i class="fa fa-phone"></i>
                             </div>
-                        @endif
-                        @if (count($errors) > 0)
-                            <div class="alert alert-danger">
-                                <strong>Whoops!</strong> There were some problems with your input.
-                                <ul>
-                                    @foreach ($errors->all() as $error)
-                                        <li>{{ $error }}</li>
-                                    @endforeach
-                                </ul>
+                            <div class="media-body">
+                                <small class="text-muted">Phone</small>
+                                <div class="font-weight-normal1">
+                                    {{ $company->phone }}
+                                </div>
                             </div>
-                        @endif
-                        <div class="expanel expanel-default">
-                            <div class="expanel-heading">
-                                <h3 class="expanel-title" style="text-align: center">Company Information &nbsp
-                                </h3>
+                        </div>
+                        <div class="media mr-4">
+                            <div class="media-icon bg-warning text-white mr-3 mt-1">
+                                <i class="fa fa-slack"></i>
                             </div>
-                            <div class="expanel-body">
-                                <div class="row row-sm">
-                                    <div class="col-lg">
-                                        <label class="col-md-12 form-label">Company title*</label>
-                                        <input class="form-control mb-4" placeholder="Company title" required type="text"
-                                            name='title' value='{{ $company->title }}'>
-                                    </div>
-                                    <div class="col-lg">
-                                        <label class="col-md-12 form-label">Email*</label>
-                                        <input class="form-control mb-4" placeholder="Email" type="email" required
-                                            name='email' value='{{ $company->email }}'>
-                                    </div>
-                                    <div class="col-lg">
-                                        <label class="col-md-12 form-label">Phone*</label>
-                                        <input class="form-control mb-4" placeholder="Phone" type="text" required
-                                            name='phone' maxlength="10" value='{{ $company->phone }}'>
-                                    </div>
-                                    <div class="col-lg">
-                                        <label class="col-md-12 form-label">Address*</label>
-                                        <input class="form-control mb-4" placeholder="Address" type="text" required
-                                            name='address' value='{{ $company->address }}'>
-                                    </div>
+                            <div class="media-body">
+                                <small class="text-muted">Email</small>
+                                <div class="font-weight-normal1">
+                                    {{ $company->email }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="media">
+                            <div class="media-icon bg-info text-white mr-3 mt-1">
+                                <i class="fa fa-map"></i>
+                            </div>
+                            <div class="media-body">
+                                <small class="text-muted">Address</small>
+                                <div class="font-weight-normal1">
+                                    {{ $company->address }}
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="card-footer">
-                        <input type="submit" value="Save" name="action" class="btn btn-primary mt-4 mb-0">
-                    </div>
-                </form>
+                </div>
             </div>
         </div>
+        <div class="col-9">
+            @if ($message = Session::get('success'))
+                <div class="alert alert-success" role="alert"><button type="button" class="close" data-dismiss="alert"
+                        aria-hidden="true">×</button>
+                    <i class="fa fa-check-circle-o mr-2" aria-hidden="true"></i>{{ $message }}.
+                </div>
+            @endif
+            @if (count($errors) > 0)
+                <div class="alert alert-danger">
+                    <strong>Whoops!</strong> There were some problems with your input.
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">Liste des employes</div>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered text-nowrap" id="example1">
+                            <thead>
+                                <tr>
+                                    <th class="wd-15p border-bottom-0">Fullname</th>
+                                    <th class="wd-15p border-bottom-0">Email</th>
+                                    <th class="wd-15p border-bottom-0">Phone</th>
+                                    <th class="wd-15p border-bottom-0">Address</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($company->employes as $employe)
+                                    <tr>
+                                        <td>{{ $employe->fullname }}</td>
+                                        <td>{{ $company->email }}</td>
+                                        <td>{{ $company->phone }}</td>
+                                        <td>{{ $company->address }}</td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
     </div>
 @endsection
 @section('js')

@@ -33,57 +33,140 @@
 
 @section('content')
     <div class="row mt-3">
-        <div class="col-lg-12 col-md-12">
+        <div class="col-3">
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title">Update Company </h3>
+                    <div class="card-title">profile</div>
                 </div>
-                <form action="{{ route('company-update', [$company->id]) }}" method='POST' role="form"
-                    enctype="multipart/form-data">
+                <div class="card-body">
+                    <div class="main-profile-contact-list">
+                        <div class="media mr-4 mt-0">
+                            <div class="media-icon bg-primary text-white mr-3 mt-1">
+                                <i class="fa fa-user"></i>
+                            </div>
+                            <div class="media-body">
+                                <small class="text-muted">Fullname</small>
+                                <div class="font-weight-normal1">
+                                    {{ $profile->fullname }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="media mr-4">
+                            <div class="media-icon bg-secondary text-white mr-3 mt-1">
+                                <i class="fa fa-phone"></i>
+                            </div>
+                            <div class="media-body">
+                                <small class="text-muted">Phone</small>
+                                <div class="font-weight-normal1">
+                                    {{ $profile->phone }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="media mr-4">
+                            <div class="media-icon bg-warning text-white mr-3 mt-1">
+                                <i class="fa fa-slack"></i>
+                            </div>
+                            <div class="media-body">
+                                <small class="text-muted">Email</small>
+                                <div class="font-weight-normal1">
+                                    {{ $profile->email }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="media">
+                            <div class="media-icon bg-info text-white mr-3 mt-1">
+                                <i class="fa fa-map"></i>
+                            </div>
+                            <div class="media-body">
+                                <small class="text-muted">Address</small>
+                                <div class="font-weight-normal1">
+                                    {{ $profile->address }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="media">
+                            <div class="media-icon bg-indigo text-white mr-3 mt-1">
+                                <i class="fa fa-clock-o"></i>
+                            </div>
+                            <div class="media-body">
+                                <small class="text-muted">Date de naissance</small>
+                                <div class="font-weight-normal1">
+                                    {{ $profile->date_naissance }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-9">
+            @if ($message = Session::get('success'))
+                <div class="alert alert-success" role="alert"><button type="button" class="close" data-dismiss="alert"
+                        aria-hidden="true">×</button>
+                    <i class="fa fa-check-circle-o mr-2" aria-hidden="true"></i>{{ $message }}.
+                </div>
+            @endif
+            @if (count($errors) > 0)
+                <div class="alert alert-danger">
+                    <strong>Whoops!</strong> There were some problems with your input.
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">Modifier les données</div>
+                </div>
+                <form action="{{ route('profile') }}" method='POST' role="form" enctype="multipart/form-data">
                     @csrf
                     <div class="card-body pb-2">
-                        @if ($message = Session::get('success'))
-                            <div class="alert alert-success" role="alert"><button type="button" class="close"
-                                    data-dismiss="alert" aria-hidden="true">×</button>
-                                <i class="fa fa-check-circle-o mr-2" aria-hidden="true"></i>{{ $message }}.
-                            </div>
-                        @endif
-                        @if (count($errors) > 0)
-                            <div class="alert alert-danger">
-                                <strong>Whoops!</strong> There were some problems with your input.
-                                <ul>
-                                    @foreach ($errors->all() as $error)
-                                        <li>{{ $error }}</li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                        @endif
+
                         <div class="expanel expanel-default">
                             <div class="expanel-heading">
-                                <h3 class="expanel-title" style="text-align: center">Company Information &nbsp
+                                <h3 class="expanel-title" style="text-align: center">Employe Information &nbsp
                                 </h3>
                             </div>
                             <div class="expanel-body">
                                 <div class="row row-sm">
                                     <div class="col-lg">
-                                        <label class="col-md-12 form-label">Company title*</label>
-                                        <input class="form-control mb-4" placeholder="Company title" required type="text"
-                                            name='title' value='{{ $company->title }}'>
+                                        <label class="col-md-12 form-label">Fullname*</label>
+                                        <input class="form-control mb-4" placeholder="Fullname" required type="text"
+                                            name='fullname' value='{{ $profile->fullname }}'>
                                     </div>
                                     <div class="col-lg">
                                         <label class="col-md-12 form-label">Email*</label>
                                         <input class="form-control mb-4" placeholder="Email" type="email" required
-                                            name='email' value='{{ $company->email }}'>
+                                            name='email' value='{{ $profile->email }}'>
                                     </div>
                                     <div class="col-lg">
                                         <label class="col-md-12 form-label">Phone*</label>
                                         <input class="form-control mb-4" placeholder="Phone" type="text" required
-                                            name='phone' maxlength="10" value='{{ $company->phone }}'>
+                                            name='phone' maxlength="10" value='{{ $profile->phone }}'>
                                     </div>
                                     <div class="col-lg">
                                         <label class="col-md-12 form-label">Address*</label>
                                         <input class="form-control mb-4" placeholder="Address" type="text" required
-                                            name='address' value='{{ $company->address }}'>
+                                            name='address' value='{{ $profile->address }}'>
+                                    </div>
+                                </div>
+                                <div class="row row-sm">
+                                    <div class="col-lg">
+                                        <label class="col-md-12 form-label">Date naissance*</label>
+                                        <input class="form-control mb-4" placeholder="Date naissance" type="date"
+                                            required name='date_naissance' value='{{ $profile->date_naissance }}'>
+                                    </div>
+                                    <div class="col-lg">
+                                        <label class="col-md-12 form-label">Password*</label>
+                                        <input class="form-control mb-4" placeholder="Password" type="password"
+                                            name='password' value='{{ old('password') }}'>
+                                    </div>
+                                    <div class="col-lg">
+                                        <label class="col-md-12 form-label">Confirm Password </label>
+                                        <input class="form-control mb-4" placeholder="Password" type="password"
+                                            name='password_confirmation'>
                                     </div>
                                 </div>
                             </div>
@@ -95,6 +178,7 @@
                 </form>
             </div>
         </div>
+    </div>
     </div>
 @endsection
 @section('js')

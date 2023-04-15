@@ -2,6 +2,10 @@
 @section('css')
     <!--INTERNAL Select2 css -->
     <link href="{{ URL::asset('admin_assets/plugins/select2/select2.min.css') }}" rel="stylesheet" />
+
+    <link href="{{ URL::asset('admin_assets/plugins/datatable/css/dataTables.bootstrap4.min.css') }}" rel="stylesheet" />
+    <link href="{{ URL::asset('admin_assets/plugins/datatable/css/buttons.bootstrap4.min.css') }}" rel="stylesheet">
+    <link href="{{ URL::asset('admin_assets/plugins/datatable/responsive.bootstrap4.min.css') }}" rel="stylesheet" />
 @endsection
 @section('page-header')
     <!--Page header-->
@@ -84,21 +88,4 @@
     <script src="{{ URL::asset('admin_assets/plugins/datatable/dataTables.responsive.min.js') }}"></script>
     <script src="{{ URL::asset('admin_assets/plugins/datatable/responsive.bootstrap4.min.js') }}"></script>
     <script src="{{ URL::asset('admin_assets/js/datatables.js') }}"></script>
-
-    <!-- INTERNAL Clipboard js -->
-    <script src="{{ URL::asset('admin_assets/plugins/clipboard/clipboard.min.js') }}"></script>
-    <script src="{{ URL::asset('admin_assets/plugins/clipboard/clipboard.js') }}"></script>
-
-    <!-- INTERNAL Prism js -->
-    <script src="{{ URL::asset('admin_assets/plugins/prism/prism.js') }}"></script>
-    <!-- INTERNAL Select2 js -->
-    <script src="{{ URL::asset('admin_assets/plugins/select2/select2.full.min.js') }}"></script>
-    <script src="{{ URL::asset('admin_assets/js/select2.js') }}"></script>
-
-    <!--INTERNAL Sumoselect js-->
-    <script src="{{ URL::asset('admin_assets/plugins/sumoselect/jquery.sumoselect.js') }}"></script>
-
-    <!--INTERNAL Form Advanced Element -->
-    <script src="{{ URL::asset('admin_assets/js/formelementadvnced.js') }}"></script>
-    <script src="{{ URL::asset('admin_assets/js/form-elements.js') }}"></script>
 @endsection
