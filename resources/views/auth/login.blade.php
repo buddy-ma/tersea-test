@@ -23,6 +23,7 @@
                                     <h1>Login</h1>
                                 </div>
                                 <div class="card-body">
+                                    {{-- Inputs with values only for testing --}}
                                     <form method="POST" action="{{ route('admin-login') }}">
                                         @csrf
                                         <div class="input-group mb-4">
@@ -32,7 +33,7 @@
                                                 </div>
                                             </div>
                                             <input type="email" class="form-control" style="height: 50px" name="email"
-                                                value="{{ old('email') }}" required autocomplete="email" autofocus
+                                                value="admin@tersea.com" required autocomplete="email" autofocus
                                                 placeholder="email">
                                             @error('email')
                                                 <span class="invalid-feedback" role="alert">
@@ -47,7 +48,8 @@
                                                 </div>
                                             </div>
                                             <input type="password" class="form-control" style="height: 50px" name="password"
-                                                required autocomplete="current-password" placeholder="Password">
+                                                required autocomplete="current-password" placeholder="Password"
+                                                value="123456789">
                                             @error('password')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>

@@ -1,15 +1,15 @@
 <?php
 
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Artisan;
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\Admin\UserController;
-use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Admin\CompanyController;
 use App\Http\Controllers\Admin\InvitationController;
 use App\Http\Controllers\Admin\StatisticsController;
+use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Auth\EmployeLoginController;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\HomeController;
+use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,6 +24,7 @@ use App\Http\Controllers\Auth\EmployeLoginController;
 
 Auth::routes(['register' => false]);
 Route::redirect('/', '/admin/dashboard');
+Route::redirect('/admin', '/admin/dashboard');
 
 Route::group(['prefix' => 'admin', 'middleware' => ['auth:web']], function () {
     Route::get('/dashboard', [StatisticsController::class, 'Dashboard'])->name('dashboard');
