@@ -25,7 +25,8 @@
                                     <div class="d-flex"><span class="time-data">Task Done</span><span
                                             class="ml-auto text-muted fs-11">{{ $histo->updated_at->translatedFormat('F j, Y') }}</span>
                                     </div>
-                                    <p class="text-muted fs-12"><span class="text-info"> {{ $histo->user->name }}</span>
+                                    <p class="text-muted fs-12"><span class="text-info">
+                                            Admin {{ $histo->user->name }}</span>
                                         <a href="{{ url($histo->link) }}" class="font-weight-semibold">
                                             {{ $histo->action }}
                                         </a>

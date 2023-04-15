@@ -43,6 +43,8 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth:web']], function () {
         Route::get('/edit/{id?}', [CompanyController::class, 'edit'])->name('show-company-edit');
         Route::post('/{id?}', [CompanyController::class, 'update'])->name('company-update');
         Route::delete('/delete/{id?}', [CompanyController::class, 'delete'])->name('company-delete');
+
+        Route::get('/employe/verify/{id?}', [CompanyController::class, 'verify'])->name('employe-verify');
     });
 
     Route::prefix('invitations')->group(function () {
@@ -81,6 +83,7 @@ Route::group(['prefix' => 'employe'], function () {
 });
 
 Route::group(['prefix' => 'employe', 'middleware' => ['auth:employe']], function () {
+    Route::get('/wait', [HomeController::class, 'wait'])->name('wait');
     Route::get('/home', [HomeController::class, 'home'])->name('home');
     Route::get('/profile', [HomeController::class, 'profile'])->name('profile');
     Route::post('/profile', [HomeController::class, 'profileUpdate'])->name('profile-update');

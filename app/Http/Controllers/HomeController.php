@@ -14,18 +14,25 @@ use Illuminate\Support\Facades\Redirect;
 
 class HomeController extends Controller
 {
+    public function wait()
+    {
+        return view('employe.mains.wait');
+    }
+
     public function index()
     {
+        if (Auth::guard('employe')->user()->status == 0) {
+            return redirect('/employe/wait');
+        }
         return view('employe.mains.index');
     }
 
     public function home()
     {
-        if (Auth::user()->status == 0) {
-            return view('employe.mains.wait');
-        } else {
-            return view('employe.mains.home');
+        if (Auth::guard('employe')->user()->status == 0) {
+            return redirect('/employe/wait');
         }
+        return view('employe.mains.home');
     }
 
     public function invitation($id)
@@ -67,6 +74,9 @@ class HomeController extends Controller
 
     public function profile()
     {
+        if (Auth::guard('employe')->user()->status == 0) {
+            return redirect('/employe/wait');
+        }
         $profile = Auth::user();
         return view('employe.mains.profile', ['profile' => $profile]);
     }
@@ -99,6 +109,9 @@ class HomeController extends Controller
 
     public function company()
     {
+        if (Auth::guard('employe')->user()->status == 0) {
+            return redirect('/employe/wait');
+        }
         $company_id = Auth::user()->company_id;
         $company = Company::find($company_id);
         return view('employe.mains.company', ['company' => $company]);

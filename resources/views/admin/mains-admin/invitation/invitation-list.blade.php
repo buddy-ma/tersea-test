@@ -31,7 +31,7 @@
                         <table class="table table-bordered text-nowrap" id="example1">
                             <thead>
                                 <tr>
-                                    <th class="wd-15p border-bottom-0">Title</th>
+                                    <th class="wd-15p border-bottom-0">Name</th>
                                     <th class="wd-15p border-bottom-0">Email</th>
                                     <th class="wd-15p border-bottom-0">Societe</th>
                                     <th class="wd-15p border-bottom-0">Ouvert</th>
@@ -49,16 +49,19 @@
                                         @else
                                             <td><span class="badge badge-danger">Pas encore</span></td>
                                         @endif
-                                        @if ($invitation->isCanceled == 0)
-                                            <td>
-                                                <a href="{{ route('invitation-close', $invitation->id) }}"
-                                                    class="btn btn-danger mb-2">Annuler</a>
-                                            </td>
-                                        @else
-                                            <td>
-                                                <a href="{{ route('invitation-open', $invitation->id) }}"
-                                                    class="btn btn-success mb-2">Réactiver</a>
-                                            </td>
+
+                                        @if ($invitation->isOpen == 0)
+                                            @if ($invitation->isCanceled == 0)
+                                                <td>
+                                                    <a href="{{ route('invitation-close', $invitation->id) }}"
+                                                        class="btn btn-danger mb-2">Annuler</a>
+                                                </td>
+                                            @else
+                                                <td>
+                                                    <a href="{{ route('invitation-open', $invitation->id) }}"
+                                                        class="btn btn-success mb-2">Réactiver</a>
+                                                </td>
+                                            @endif
                                         @endif
                                     </tr>
                                 @endforeach

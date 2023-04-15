@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
 use App\Models\Company;
+use App\Models\Employe;
 use App\Models\History;
-use App\Rules\PhoneValidation;
 use Illuminate\Http\Request;
+use App\Rules\PhoneValidation;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
 class CompanyController extends Controller
@@ -96,5 +97,19 @@ class CompanyController extends Controller
         ]);
         session()->flash('success', 'Company has been deleted sucssefuly');
         return redirect('admin/companies');
+    }
+
+    public function verify($id)
+    {
+        $employe = Employe::find($id);
+        $employe->status = 1;
+        $employe->save();
+        History::create([
+            'user_id' => Auth::guard('web')->id(),
+            'action' => 'a confirmer le profil de ' . $employe->fullname,
+            'link' => '/admin/companies/show/' . $employe->company->id,
+        ]);
+        session()->flash('success', 'Employe confirmé avec success');
+        return redirect('admin/companies/show/' . $employe->company->id);
     }
 }

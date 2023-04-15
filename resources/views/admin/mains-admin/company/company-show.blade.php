@@ -106,7 +106,7 @@
                 <div class="card-header">
                     <div class="card-title">Liste des employes</div>
                     <div class="float-right ml-auto">
-                        <a data-target="#modaldemo1" data-toggle="modal" class="btn btn-success">Add Employe</a>
+                        <a data-target="#modaldemo1" data-toggle="modal" class="btn btn-success">Inviter Employe</a>
                         {{-- Modal To add employe --}}
                         <div class="modal fade" id="modaldemo1" tabindex="-1" role="dialog"
                             aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -122,8 +122,8 @@
                                         @csrf
                                         <input type="hidden" name='company_id' value='{{ $company->id }}'>
                                         <div class="modal-body">
-                                            <label class="form-label d-block">Title*</label>
-                                            <input class="form-control mb-4" placeholder="title" required type="text"
+                                            <label class="form-label d-block">Name*</label>
+                                            <input class="form-control mb-4" placeholder="Name" required type="text"
                                                 name='title' value='{{ old('title') }}'>
                                             <label class="form-label d-block">Email*</label>
                                             <input class="form-control mb-4" placeholder="Email" type="email" required
@@ -149,6 +149,7 @@
                                     <th class="wd-15p border-bottom-0">Email</th>
                                     <th class="wd-15p border-bottom-0">Phone</th>
                                     <th class="wd-15p border-bottom-0">Address</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -158,6 +159,12 @@
                                         <td>{{ $employe->email }}</td>
                                         <td>{{ $employe->phone }}</td>
                                         <td>{{ $employe->address }}</td>
+                                        <td>
+                                            @if ($employe->status == 0)
+                                                <a href="{{ route('employe-verify', $employe->id) }}"
+                                                    class="btn btn-success mb-2">Verifier</a>
+                                            @endif
+                                        </td>
                                     </tr>
                                 @endforeach
                             </tbody>
@@ -174,7 +181,7 @@
                         <table class="table table-bordered text-nowrap" id="example2">
                             <thead>
                                 <tr>
-                                    <th class="wd-15p border-bottom-0">Title</th>
+                                    <th class="wd-15p border-bottom-0">Name</th>
                                     <th class="wd-15p border-bottom-0">Email</th>
                                     <th class="wd-15p border-bottom-0">Ouvert</th>
                                     <th class="wd-15p border-bottom-0">Actions</th>
@@ -191,8 +198,15 @@
                                             <td><span class="badge badge-danger">Pas encore</span></td>
                                         @endif
                                         <td>
-                                            <a href="{{ route('invitation-close', $invitation->id) }}"
-                                                class="btn btn-danger mb-2">Annuler</a>
+                                            @if ($invitation->isOpen == 0)
+                                                @if ($invitation->isCanceled == 0)
+                                                    <a href="{{ route('invitation-close', $invitation->id) }}"
+                                                        class="btn btn-danger mb-2">Annuler</a>
+                                                @else
+                                                    <a href="{{ route('invitation-open', $invitation->id) }}"
+                                                        class="btn btn-success mb-2">Réactiver</a>
+                                                @endif
+                                            @endif
                                         </td>
                                     </tr>
                                 @endforeach

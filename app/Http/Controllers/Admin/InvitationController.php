@@ -30,8 +30,8 @@ class InvitationController extends Controller
         $invitation->save();
         History::create([
             'user_id' => Auth::guard('web')->id(),
-            'action' => 'a ajouté une invitation ' . $invitation->title . ' a la societe ' . $invitation->company->title,
-            'link' => '/admin/companies/' . $request->input('company_id')
+            'action' => 'a invite l\'employe ' . $invitation->title . ' a la societe ' . $invitation->company->title,
+            'link' => '/admin/companies/show/' . $request->input('company_id')
         ]);
         session()->flash('success', 'Invitation has been sent successfully');
         return redirect('admin/companies/show/' . $request->input('company_id'));
