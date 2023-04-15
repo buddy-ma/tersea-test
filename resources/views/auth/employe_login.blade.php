@@ -20,10 +20,10 @@
                             @endif
                             <div class="card">
                                 <div class="text-center title-style " style="margin-bottom: 50px">
-                                    <h1>Login</h1>
+                                    <h1>Employe Login</h1>
                                 </div>
                                 <div class="card-body">
-                                    <form method="POST" action="{{ route('admin-login') }}">
+                                    <form method="POST" action="{{ route('employe-login') }}">
                                         @csrf
                                         <div class="input-group mb-4">
                                             <div class="input-group-prepend">

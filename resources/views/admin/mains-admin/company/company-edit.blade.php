@@ -34,7 +34,7 @@
 @endsection
 
 @section('content')
-    <div class="row">
+    <div class="row mt-3">
         <div class="col-lg-12 col-md-12">
             <div class="card">
                 <div class="card-header">

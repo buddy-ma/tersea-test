@@ -5,11 +5,11 @@
     <!-- Meta data -->
     <meta charset="UTF-8">
     <meta name='viewport' content='width=device-width, initial-scale=1.0, user-scalable=0'>
-    <meta content="Tersea -  Admin" name="description">
+    <meta content="Tersea - Employe" name="description">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <meta content="PAP" name="author">
-    <meta name="keywords" content="admin panel PAP" />
-    @include('admin.layouts.head')
+    <meta content="Tersea" name="author">
+    <meta name="keywords" content="Employe panel Tersea" />
+    @include('employe.layouts.head')
     @livewireStyles
 </head>
 
@@ -22,11 +22,11 @@
     <!-- Page -->
     <div class="page">
         <div class="page-main">
-            @include('admin.layouts.aside-menu')
+            @include('employe.layouts.aside-menu')
             <!-- App-Content -->
             <div class="app-content main-content">
                 <div class="side-app">
-                    @include('admin.layouts.header')
+                    @include('employe.layouts.header')
                     @yield('page-header')
                     @yield('content')
                 </div><!-- End Page -->
@@ -34,7 +34,7 @@
         </div>
     </div>
     @livewireScripts
-    @include('admin.layouts.footer-scripts')
+    @include('employe.layouts.footer-scripts')
 
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>

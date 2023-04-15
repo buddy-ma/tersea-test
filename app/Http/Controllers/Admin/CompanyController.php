@@ -14,7 +14,7 @@ class CompanyController extends Controller
     public function list()
     {
         $companies = Company::get();
-        return view('admin.mains-admin.company.company-list', ['companies'=>$companies]);
+        return view('admin.mains-admin.company.company-list', ['companies' => $companies]);
     }
 
     public function add()
@@ -39,11 +39,11 @@ class CompanyController extends Controller
         $company->save();
         History::create([
             'user_id' => Auth::guard('web')->id(),
-            'action' => 'a ajouté la societe '.$company->title,
+            'action' => 'a ajouté la societe ' . $company->title,
             'link' => '/admin/companies'
         ]);
-        session()->flash('success','Company has been added successfully');
-        return redirect('admin/companies'); 
+        session()->flash('success', 'Company has been added successfully');
+        return redirect('admin/companies');
     }
 
     public function show($id)
@@ -75,23 +75,23 @@ class CompanyController extends Controller
         $company->save();
         History::create([
             'user_id' => Auth::guard('web')->id(),
-            'action' => 'a modifier la societe '.$company->title,
+            'action' => 'a modifier la societe ' . $company->title,
             'link' => '/admin/companies'
         ]);
-        session()->flash('success','Company has been updated successfully');
-        return redirect('admin/companies'); 
+        session()->flash('success', 'Company has been updated successfully');
+        return redirect('admin/companies');
     }
 
     public function delete($id)
     {
         $company = Company::find($id);
-        if(count($company->employes) != 0){
+        if (count($company->employes) != 0) {
             return back()->with('error', 'Company has Employes still');
         }
         $company->delete();
         History::create([
             'user_id' => Auth::guard('web')->id(),
-            'action' => 'a supprimé la societe '.$company->title,
+            'action' => 'a supprimé la societe ' . $company->title,
             'link' => '/admin/companies'
         ]);
         session()->flash('success', 'Company has been deleted sucssefuly');

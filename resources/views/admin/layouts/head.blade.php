@@ -1,5 +1,5 @@
   <!-- Title -->
-  <title>PAP - Admin</title>
+  <title>Tersea - Admin</title>
 
   <!--Favicon -->
   <link rel="icon" href="{{ URL::asset('admin_assets/images/brand/favicon.ico') }}" type="image/x-icon" />

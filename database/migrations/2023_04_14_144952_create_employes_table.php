@@ -21,7 +21,6 @@ return new class extends Migration
             $table->date('date_naissance');
             $table->string('password');
             $table->tinyInteger('status')->default(1);
-            $table->tinyInteger('isFirstTime')->default(1);
             $table->timestamps();
         });
     }

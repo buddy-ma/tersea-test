@@ -29,8 +29,6 @@
             color: rgba(255, 255, 255, 1) !important;
         }
     </style>
-    <script src="https://unpkg.com/vue@3"></script>
-    <script src="https://cdn.ckeditor.com/4.20.2/full/ckeditor.js"></script>
 @endsection
 
 @section('content')
@@ -38,18 +36,29 @@
         <div class="col-3">
             <div class="card">
                 <div class="card-header">
-                    <div class="card-title">{{ $company->title }}</div>
+                    <div class="card-title">profile</div>
                 </div>
                 <div class="card-body">
                     <div class="main-profile-contact-list">
                         <div class="media mr-4 mt-0">
                             <div class="media-icon bg-primary text-white mr-3 mt-1">
+                                <i class="fa fa-user"></i>
+                            </div>
+                            <div class="media-body">
+                                <small class="text-muted">Fullname</small>
+                                <div class="font-weight-normal1">
+                                    {{ $profile->fullname }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="media mr-4">
+                            <div class="media-icon bg-secondary text-white mr-3 mt-1">
                                 <i class="fa fa-phone"></i>
                             </div>
                             <div class="media-body">
                                 <small class="text-muted">Phone</small>
                                 <div class="font-weight-normal1">
-                                    {{ $company->phone }}
+                                    {{ $profile->phone }}
                                 </div>
                             </div>
                         </div>
@@ -60,7 +69,7 @@
                             <div class="media-body">
                                 <small class="text-muted">Email</small>
                                 <div class="font-weight-normal1">
-                                    {{ $company->email }}
+                                    {{ $profile->email }}
                                 </div>
                             </div>
                         </div>
@@ -71,7 +80,18 @@
                             <div class="media-body">
                                 <small class="text-muted">Address</small>
                                 <div class="font-weight-normal1">
-                                    {{ $company->address }}
+                                    {{ $profile->address }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="media">
+                            <div class="media-icon bg-indigo text-white mr-3 mt-1">
+                                <i class="fa fa-clock-o"></i>
+                            </div>
+                            <div class="media-body">
+                                <small class="text-muted">Date de naissance</small>
+                                <div class="font-weight-normal1">
+                                    {{ $profile->date_naissance }}
                                 </div>
                             </div>
                         </div>
@@ -98,118 +118,67 @@
             @endif
             <div class="card">
                 <div class="card-header">
-                    <div class="card-title">Liste des employes</div>
-                    <div class="float-right ml-auto">
-                        <a data-target="#modaldemo1" data-toggle="modal" class="btn btn-success">Add Employe</a>
+                    <div class="card-title">Modifier les données</div>
+                </div>
+                <form action="{{ route('profile') }}" method='POST' role="form" enctype="multipart/form-data">
+                    @csrf
+                    <div class="card-body pb-2">
 
-                        <div class="modal fade" id="modaldemo1" tabindex="-1" role="dialog"
-                            aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Ajouter Invitation</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
+                        <div class="expanel expanel-default">
+                            <div class="expanel-heading">
+                                <h3 class="expanel-title" style="text-align: center">Employe Information &nbsp
+                                </h3>
+                            </div>
+                            <div class="expanel-body">
+                                <div class="row row-sm">
+                                    <div class="col-lg">
+                                        <label class="col-md-12 form-label">Fullname*</label>
+                                        <input class="form-control mb-4" placeholder="Fullname" required type="text"
+                                            name='fullname' value='{{ $profile->fullname }}'>
                                     </div>
-                                    <form action="{{ route('invitation-add') }}" method="POST">
-                                        @csrf
-                                        <input type="hidden" name='company_id' value='{{ $company->id }}'>
-                                        <div class="modal-body">
-                                            <label class="form-label d-block">Title*</label>
-                                            <input class="form-control mb-4" placeholder="title" required type="text"
-                                                name='title' value='{{ old('title') }}'>
-                                            <label class="form-label d-block">Email*</label>
-                                            <input class="form-control mb-4" placeholder="Email" type="email" required
-                                                name='email' value='{{ old('email') }}'>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button class="btn btn-primary" type="submit">Save changes</button>
-                                            <button class="btn btn-secondary" data-dismiss="modal" aria-label="Close"
-                                                type="button">Close</button>
-                                        </div>
-                                    </form>
+                                    <div class="col-lg">
+                                        <label class="col-md-12 form-label">Email*</label>
+                                        <input class="form-control mb-4" placeholder="Email" type="email" required
+                                            name='email' value='{{ $profile->email }}'>
+                                    </div>
+                                    <div class="col-lg">
+                                        <label class="col-md-12 form-label">Phone*</label>
+                                        <input class="form-control mb-4" placeholder="Phone" type="text" required
+                                            name='phone' maxlength="10" value='{{ $profile->phone }}'>
+                                    </div>
+                                    <div class="col-lg">
+                                        <label class="col-md-12 form-label">Address*</label>
+                                        <input class="form-control mb-4" placeholder="Address" type="text" required
+                                            name='address' value='{{ $profile->address }}'>
+                                    </div>
+                                </div>
+                                <div class="row row-sm">
+                                    <div class="col-lg">
+                                        <label class="col-md-12 form-label">Date naissance*</label>
+                                        <input class="form-control mb-4" placeholder="Date naissance" type="date"
+                                            required name='date_naissance' value='{{ $profile->date_naissance }}'>
+                                    </div>
+                                    <div class="col-lg">
+                                        <label class="col-md-12 form-label">Password*</label>
+                                        <input class="form-control mb-4" placeholder="Password" type="password"
+                                            name='password' value='{{ old('password') }}'>
+                                    </div>
+                                    <div class="col-lg">
+                                        <label class="col-md-12 form-label">Confirm Password </label>
+                                        <input class="form-control mb-4" placeholder="Password" type="password"
+                                            name='password_confirmation'>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="card-body">
-                    <div class="table-responsive">
-                        <table class="table table-bordered text-nowrap" id="example1">
-                            <thead>
-                                <tr>
-                                    <th class="wd-15p border-bottom-0">Fullname</th>
-                                    <th class="wd-15p border-bottom-0">Email</th>
-                                    <th class="wd-15p border-bottom-0">Phone</th>
-                                    <th class="wd-15p border-bottom-0">Address</th>
-                                    <th class="wd-15p border-bottom-0">Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($company->employes as $employe)
-                                    <tr>
-                                        <td>{{ $employe->fullname }}</td>
-                                        <td>{{ $company->email }}</td>
-                                        <td>{{ $company->phone }}</td>
-                                        <td>{{ $company->address }}</td>
-                                        <td>
-                                            <a href="{{ route('show-employe-edit', $employe->id) }}"
-                                                class="btn btn-primary mb-2">Edit</a>
-                                            @if (count($company->employes) == 0)
-                                                <form action="{{ route('employe-delete', [$employe->id]) }}"
-                                                    method="post">
-                                                    @method('delete')
-                                                    @csrf
-
-                                                    <button type="submit" class="btn btn-danger">Disable</a>
-                                                </form>
-                                            @endif
-                                        </td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
+                    <div class="card-footer">
+                        <input type="submit" value="Save" name="action" class="btn btn-primary mt-4 mb-0">
                     </div>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-header">
-                    <div class="card-title">Liste des invitations</div>
-                </div>
-                <div class="card-body">
-                    <div class="table-responsive">
-                        <table class="table table-bordered text-nowrap" id="example1">
-                            <thead>
-                                <tr>
-                                    <th class="wd-15p border-bottom-0">Title</th>
-                                    <th class="wd-15p border-bottom-0">Email</th>
-                                    <th class="wd-15p border-bottom-0">Ouvert</th>
-                                    <th class="wd-15p border-bottom-0">Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($company->invitations as $invitation)
-                                    <tr>
-                                        <td>{{ $invitation->title }}</td>
-                                        <td>{{ $invitation->email }}</td>
-                                        @if ($invitation->isOpen == 1)
-                                            <td><span class="badge badge-success">Ouvert</span></td>
-                                        @else
-                                            <td><span class="badge badge-danger">Pas encore</span></td>
-                                        @endif
-                                        <td>
-                                            <a href="{{ route('invitation-close', $invitation->id) }}"
-                                                class="btn btn-danger mb-2">Annuler</a>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
+                </form>
             </div>
         </div>
+    </div>
     </div>
 @endsection
 @section('js')

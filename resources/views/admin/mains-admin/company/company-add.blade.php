@@ -29,12 +29,10 @@
             color: rgba(255, 255, 255, 1) !important;
         }
     </style>
-    <script src="https://unpkg.com/vue@3"></script>
-    <script src="https://cdn.ckeditor.com/4.20.2/full/ckeditor.js"></script>
 @endsection
 
 @section('content')
-    <div class="row">
+    <div class="row mt-3">
         <div class="col-lg-12 col-md-12">
             <div class="card">
                 <div class="card-header">
@@ -130,47 +128,4 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <script src="http://bootstrap-tagsinput.github.io/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js"></script>
     <script src="{{ URL::asset('js/app.js') }}"></script>
-    <script>
-        window.addEventListener('swal:addBien', event => {
-            var form = document.createElement("div");
-            form.innerHTML = `
-                <div class="form-row">
-                    <div class="form-group col-6 mb-0">
-                        <div class="form-group">
-                            <label class="form-label text-left">Titre*</label>
-                            <input type="text" name="title" class="form-control" id="title" required/>
-                        </div>
-                    </div>
-                    <div class="form-group col-6 mb-0">
-                        <div class="form-group">
-                            <label class="form-label text-left">Prix*</label>
-                            <input type="text" name="prix" class="form-control" id="prix" required/>
-                        </div>
-                    </div>
-                    <div class="form-group col-12 mb-0">
-                        <div class="form-group">
-                            <label class="form-label text-left">Surface*</label>
-                            <input type="text" name="surface" class="form-control" id="surface" /><br>
-                        </div>
-                    </div>
-                </div>
-            `;
-
-            new swal({
-                title: 'Ajouter appartement',
-                html: form,
-                showCancelButton: true,
-                confirmButtonText: 'Save',
-                showLoaderOnConfirm: true,
-                allowOutsideClick: () => !Swal.isLoading()
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    var title = document.getElementById("title").value;
-                    var prix = document.getElementById("prix").value;
-                    var surface = document.getElementById("surface").value;
-                    Livewire.emit('submitAddBien', title, prix, surface);
-                }
-            });
-        });
-    </script>
 @endsection

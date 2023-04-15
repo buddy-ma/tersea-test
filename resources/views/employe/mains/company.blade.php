@@ -99,40 +99,6 @@
             <div class="card">
                 <div class="card-header">
                     <div class="card-title">Liste des employes</div>
-                    <div class="float-right ml-auto">
-                        <a data-target="#modaldemo1" data-toggle="modal" class="btn btn-success">Add Employe</a>
-
-                        <div class="modal fade" id="modaldemo1" tabindex="-1" role="dialog"
-                            aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Ajouter Invitation</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <form action="{{ route('invitation-add') }}" method="POST">
-                                        @csrf
-                                        <input type="hidden" name='company_id' value='{{ $company->id }}'>
-                                        <div class="modal-body">
-                                            <label class="form-label d-block">Title*</label>
-                                            <input class="form-control mb-4" placeholder="title" required type="text"
-                                                name='title' value='{{ old('title') }}'>
-                                            <label class="form-label d-block">Email*</label>
-                                            <input class="form-control mb-4" placeholder="Email" type="email" required
-                                                name='email' value='{{ old('email') }}'>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button class="btn btn-primary" type="submit">Save changes</button>
-                                            <button class="btn btn-secondary" data-dismiss="modal" aria-label="Close"
-                                                type="button">Close</button>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
@@ -143,7 +109,6 @@
                                     <th class="wd-15p border-bottom-0">Email</th>
                                     <th class="wd-15p border-bottom-0">Phone</th>
                                     <th class="wd-15p border-bottom-0">Address</th>
-                                    <th class="wd-15p border-bottom-0">Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -153,63 +118,16 @@
                                         <td>{{ $company->email }}</td>
                                         <td>{{ $company->phone }}</td>
                                         <td>{{ $company->address }}</td>
-                                        <td>
-                                            <a href="{{ route('show-employe-edit', $employe->id) }}"
-                                                class="btn btn-primary mb-2">Edit</a>
-                                            @if (count($company->employes) == 0)
-                                                <form action="{{ route('employe-delete', [$employe->id]) }}"
-                                                    method="post">
-                                                    @method('delete')
-                                                    @csrf
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
 
-                                                    <button type="submit" class="btn btn-danger">Disable</a>
-                                                </form>
-                                            @endif
-                                        </td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-header">
-                    <div class="card-title">Liste des invitations</div>
-                </div>
-                <div class="card-body">
-                    <div class="table-responsive">
-                        <table class="table table-bordered text-nowrap" id="example1">
-                            <thead>
-                                <tr>
-                                    <th class="wd-15p border-bottom-0">Title</th>
-                                    <th class="wd-15p border-bottom-0">Email</th>
-                                    <th class="wd-15p border-bottom-0">Ouvert</th>
-                                    <th class="wd-15p border-bottom-0">Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($company->invitations as $invitation)
-                                    <tr>
-                                        <td>{{ $invitation->title }}</td>
-                                        <td>{{ $invitation->email }}</td>
-                                        @if ($invitation->isOpen == 1)
-                                            <td><span class="badge badge-success">Ouvert</span></td>
-                                        @else
-                                            <td><span class="badge badge-danger">Pas encore</span></td>
-                                        @endif
-                                        <td>
-                                            <a href="{{ route('invitation-close', $invitation->id) }}"
-                                                class="btn btn-danger mb-2">Annuler</a>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
         </div>
+    </div>
     </div>
 @endsection
 @section('js')
