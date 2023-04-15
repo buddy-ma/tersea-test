@@ -46,6 +46,10 @@ To get started with this project, follow these steps:
 
 7- Navigate to http://localhost:8000/ in your web browser to access the application.
 
+8- Optimize your cache in case of any issue pops up :
+
+    php artisan optimize
+
 [(Back to top)](#table-of-contents)
 
 # Technologies Used
