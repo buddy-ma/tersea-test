@@ -13,6 +13,14 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
 
     <link rel="stylesheet" href="http://bootstrap-tagsinput.github.io/bootstrap-tagsinput/dist/bootstrap-tagsinput.css">
+
+    <!-- Data table css -->
+    <link href="{{ URL::asset('admin_assets/plugins/datatable/css/dataTables.bootstrap4.min.css') }}" rel="stylesheet" />
+    <link href="{{ URL::asset('admin_assets/plugins/datatable/css/buttons.bootstrap4.min.css') }}" rel="stylesheet">
+    <link href="{{ URL::asset('admin_assets/plugins/datatable/responsive.bootstrap4.min.css') }}" rel="stylesheet" />
+    <!-- Slect2 css -->
+    <link href="{{ URL::asset('admin_assets/plugins/select2/select2.min.css') }}" rel="stylesheet" />
+
     <style>
         .bootstrap-tagsinput {
             width: 100% !important;
@@ -29,8 +37,6 @@
             color: rgba(255, 255, 255, 1) !important;
         }
     </style>
-    <script src="https://unpkg.com/vue@3"></script>
-    <script src="https://cdn.ckeditor.com/4.20.2/full/ckeditor.js"></script>
 @endsection
 
 @section('content')
@@ -101,7 +107,7 @@
                     <div class="card-title">Liste des employes</div>
                     <div class="float-right ml-auto">
                         <a data-target="#modaldemo1" data-toggle="modal" class="btn btn-success">Add Employe</a>
-
+                        {{-- Modal To add employe --}}
                         <div class="modal fade" id="modaldemo1" tabindex="-1" role="dialog"
                             aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog" role="document">
@@ -135,7 +141,7 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <div class="table-responsive">
+                    <div class="table-responsive mt-4">
                         <table class="table table-bordered text-nowrap" id="example1">
                             <thead>
                                 <tr>
@@ -143,29 +149,15 @@
                                     <th class="wd-15p border-bottom-0">Email</th>
                                     <th class="wd-15p border-bottom-0">Phone</th>
                                     <th class="wd-15p border-bottom-0">Address</th>
-                                    <th class="wd-15p border-bottom-0">Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($company->employes as $employe)
                                     <tr>
                                         <td>{{ $employe->fullname }}</td>
-                                        <td>{{ $company->email }}</td>
-                                        <td>{{ $company->phone }}</td>
-                                        <td>{{ $company->address }}</td>
-                                        <td>
-                                            <a href="{{ route('show-employe-edit', $employe->id) }}"
-                                                class="btn btn-primary mb-2">Edit</a>
-                                            @if (count($company->employes) == 0)
-                                                <form action="{{ route('employe-delete', [$employe->id]) }}"
-                                                    method="post">
-                                                    @method('delete')
-                                                    @csrf
-
-                                                    <button type="submit" class="btn btn-danger">Disable</a>
-                                                </form>
-                                            @endif
-                                        </td>
+                                        <td>{{ $employe->email }}</td>
+                                        <td>{{ $employe->phone }}</td>
+                                        <td>{{ $employe->address }}</td>
                                     </tr>
                                 @endforeach
                             </tbody>
@@ -178,8 +170,8 @@
                     <div class="card-title">Liste des invitations</div>
                 </div>
                 <div class="card-body">
-                    <div class="table-responsive">
-                        <table class="table table-bordered text-nowrap" id="example1">
+                    <div class="table-responsive mt-4">
+                        <table class="table table-bordered text-nowrap" id="example2">
                             <thead>
                                 <tr>
                                     <th class="wd-15p border-bottom-0">Title</th>
@@ -217,74 +209,17 @@
     <script src="{{ URL::asset('admin_assets/plugins/select2/select2.full.min.js') }}"></script>
     <script src="{{ URL::asset('admin_assets/js/select2.js') }}"></script>
 
-    <!-- INTERNAL Datepicker js -->
-    <script src="{{ URL::asset('admin_assets/plugins/date-picker/date-picker.js') }}"></script>
-    <script src="{{ URL::asset('admin_assets/plugins/date-picker/jquery-ui.js') }}"></script>
-    <script src="{{ URL::asset('admin_assets/plugins/input-mask/jquery.maskedinput.js') }}"></script>
-
-    <!-- INTERNAL File-Uploads Js-->
-    <script src="{{ URL::asset('admin_assets/plugins/fancyuploder/jquery.ui.widget.js') }}"></script>
-    <script src="{{ URL::asset('admin_assets/plugins/fancyuploder/jquery.fileupload.js') }}"></script>
-    <script src="{{ URL::asset('admin_assets/plugins/fancyuploder/jquery.iframe-transport.js') }}"></script>
-    <script src="{{ URL::asset('admin_assets/plugins/fancyuploder/jquery.fancy-fileupload.js') }}"></script>
-    <script src="{{ URL::asset('admin_assets/plugins/fancyuploder/fancy-uploader.js') }}"></script>
-
-    <!-- INTERNAL File uploads js -->
-    <script src="{{ URL::asset('admin_assets/plugins/fileupload/js/dropify.js') }}"></script>
-    <script src="{{ URL::asset('admin_assets/js/filupload.js') }}"></script>
-
-    <!--INTERNAL Sumoselect js-->
-    <script src="{{ URL::asset('admin_assets/plugins/sumoselect/jquery.sumoselect.js') }}"></script>
-
-    <!--INTERNAL Form Advanced Element -->
-    <script src="{{ URL::asset('admin_assets/js/formelementadvnced.js') }}"></script>
-    <script src="{{ URL::asset('admin_assets/js/form-elements.js') }}"></script>
-    <script src="{{ URL::asset('admin_assets/js/file-upload.js') }}"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <script src="http://bootstrap-tagsinput.github.io/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js"></script>
-    <script src="{{ asset('js/app.js') }}"></script>
-    <script>
-        window.addEventListener('swal:addBien', event => {
-            var form = document.createElement("div");
-            form.innerHTML = `
-                <div class="form-row">
-                    <div class="form-group col-6 mb-0">
-                        <div class="form-group">
-                            <label class="form-label text-left">Titre*</label>
-                            <input type="text" name="title" class="form-control" id="title" required/>
-                        </div>
-                    </div>
-                    <div class="form-group col-6 mb-0">
-                        <div class="form-group">
-                            <label class="form-label text-left">Prix*</label>
-                            <input type="text" name="prix" class="form-control" id="prix" required/>
-                        </div>
-                    </div>
-                    <div class="form-group col-12 mb-0">
-                        <div class="form-group">
-                            <label class="form-label text-left">Surface*</label>
-                            <input type="text" name="surface" class="form-control" id="surface" /><br>
-                        </div>
-                    </div>
-                </div>
-            `;
-
-            new swal({
-                title: 'Ajouter appartement',
-                html: form,
-                showCancelButton: true,
-                confirmButtonText: 'Save',
-                showLoaderOnConfirm: true,
-                allowOutsideClick: () => !Swal.isLoading()
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    var title = document.getElementById("title").value;
-                    var prix = document.getElementById("prix").value;
-                    var surface = document.getElementById("surface").value;
-                    Livewire.emit('submitAddBien', title, prix, surface);
-                }
-            });
-        });
-    </script>
+    <script src="{{ URL::asset('admin_assets/plugins/datatable/js/jquery.dataTables.js') }}"></script>
+    <script src="{{ URL::asset('admin_assets/plugins/datatable/js/dataTables.bootstrap4.js') }}"></script>
+    <script src="{{ URL::asset('admin_assets/plugins/datatable/js/dataTables.buttons.min.js') }}"></script>
+    <script src="{{ URL::asset('admin_assets/plugins/datatable/js/buttons.bootstrap4.min.js') }}"></script>
+    <script src="{{ URL::asset('admin_assets/plugins/datatable/js/jszip.min.js') }}"></script>
+    <script src="{{ URL::asset('admin_assets/plugins/datatable/js/pdfmake.min.js') }}"></script>
+    <script src="{{ URL::asset('admin_assets/plugins/datatable/js/vfs_fonts.js') }}"></script>
+    <script src="{{ URL::asset('admin_assets/plugins/datatable/js/buttons.html5.min.js') }}"></script>
+    <script src="{{ URL::asset('admin_assets/plugins/datatable/js/buttons.print.min.js') }}"></script>
+    <script src="{{ URL::asset('admin_assets/plugins/datatable/js/buttons.colVis.min.js') }}"></script>
+    <script src="{{ URL::asset('admin_assets/plugins/datatable/dataTables.responsive.min.js') }}"></script>
+    <script src="{{ URL::asset('admin_assets/plugins/datatable/responsive.bootstrap4.min.js') }}"></script>
+    <script src="{{ URL::asset('admin_assets/js/datatables.js') }}"></script>
 @endsection

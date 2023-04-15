@@ -1,18 +1,5 @@
 @extends('admin.layouts.master')
 @section('css')
-    <!-- INTERNAL File Uploads css -->
-    <link href="{{ URL::asset('admin_assets/plugins/fancyuploder/fancy_fileupload.css') }}" rel="stylesheet" />
-
-    <!-- INTERNAL File Uploads css-->
-    <link href="{{ URL::asset('admin_assets/plugins/fileupload/css/fileupload.css') }}" rel="stylesheet" type="text/css" />
-    <!--INTERNAL Select2 css -->
-    <link href="{{ URL::asset('admin_assets/plugins/select2/select2.min.css') }}" rel="stylesheet" />
-
-    <!-- INTERNAL Sumoselect css-->
-    <link rel="stylesheet" href="{{ URL::asset('admin_assets/plugins/sumoselect/sumoselect.css') }}">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-
-    <link rel="stylesheet" href="http://bootstrap-tagsinput.github.io/bootstrap-tagsinput/dist/bootstrap-tagsinput.css">
     <style>
         .bootstrap-tagsinput {
             width: 100% !important;
@@ -97,35 +84,4 @@
     </div>
 @endsection
 @section('js')
-    <!-- INTERNAL Select2 js -->
-    <script src="{{ URL::asset('admin_assets/plugins/select2/select2.full.min.js') }}"></script>
-    <script src="{{ URL::asset('admin_assets/js/select2.js') }}"></script>
-
-    <!-- INTERNAL Datepicker js -->
-    <script src="{{ URL::asset('admin_assets/plugins/date-picker/date-picker.js') }}"></script>
-    <script src="{{ URL::asset('admin_assets/plugins/date-picker/jquery-ui.js') }}"></script>
-    <script src="{{ URL::asset('admin_assets/plugins/input-mask/jquery.maskedinput.js') }}"></script>
-
-    <!-- INTERNAL File-Uploads Js-->
-    <script src="{{ URL::asset('admin_assets/plugins/fancyuploder/jquery.ui.widget.js') }}"></script>
-    <script src="{{ URL::asset('admin_assets/plugins/fancyuploder/jquery.fileupload.js') }}"></script>
-    <script src="{{ URL::asset('admin_assets/plugins/fancyuploder/jquery.iframe-transport.js') }}"></script>
-    <script src="{{ URL::asset('admin_assets/plugins/fancyuploder/jquery.fancy-fileupload.js') }}"></script>
-    <script src="{{ URL::asset('admin_assets/plugins/fancyuploder/fancy-uploader.js') }}"></script>
-
-    <!-- INTERNAL File uploads js -->
-    <script src="{{ URL::asset('admin_assets/plugins/fileupload/js/dropify.js') }}"></script>
-    <script src="{{ URL::asset('admin_assets/js/filupload.js') }}"></script>
-
-    <!--INTERNAL Sumoselect js-->
-    <script src="{{ URL::asset('admin_assets/plugins/sumoselect/jquery.sumoselect.js') }}"></script>
-
-    <!--INTERNAL Form Advanced Element -->
-    <script src="{{ URL::asset('admin_assets/js/formelementadvnced.js') }}"></script>
-    <script src="{{ URL::asset('admin_assets/js/form-elements.js') }}"></script>
-    <script src="{{ URL::asset('admin_assets/js/file-upload.js') }}"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <script src="http://bootstrap-tagsinput.github.io/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js"></script>
-    <script src="{{ URL::asset('js/app.js') }}"></script>
 @endsection

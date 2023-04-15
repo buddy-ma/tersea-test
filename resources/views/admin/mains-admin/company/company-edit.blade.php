@@ -29,8 +29,6 @@
             color: rgba(255, 255, 255, 1) !important;
         }
     </style>
-    <script src="https://unpkg.com/vue@3"></script>
-    <script src="https://cdn.ckeditor.com/4.20.2/full/ckeditor.js"></script>
 @endsection
 
 @section('content')
