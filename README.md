@@ -7,8 +7,9 @@ This is a mini CRM application that connects a company with its employees. The a
 -   [Requirements](#requirements)
 -   [Getting Started](#getting-started)
 -   [Technologies Used](#technologies-used)
--   [Installation](#installation)
--   [Contributing](#contributing)
+-   [Features](#features)
+-   [Notes](#notes)
+-   [Acknowledgments](#acknowledgments)
 
 # Requirements
 
@@ -67,7 +68,7 @@ As requested also from the exercice, the features deployed here are separated by
 -   Administrator can create other administrators.
 -   Administrator can create, modify, or delete a company.
 -   Administrator can browse a company, see its information, check the list of its employees.
--   Administrator can invite employees to join a company via email invitation.
+-   Administrator can invite employees to join a company via invitation.
 -   Administrator can cancel an invitation if its not opened yet.
 -   Administrator can search and sort through companies and employees and invitations.
 -   Administrator actions are traced and listed in the history module with their time stamp.
@@ -77,6 +78,10 @@ As requested also from the exercice, the features deployed here are separated by
 -   Employe must login first.
 -   Employe can accept an invitation and create his account.
 -   Employe can check his information and information about their company and its employees.
+
+# Notes
+
+Please understand that i did not made the functionality of sending email just because a lack of email configuration details.
 
 # Acknowledgments
 

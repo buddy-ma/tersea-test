@@ -39,7 +39,7 @@ class AddInvitation extends Component
             'link' => '/admin/companies/show/' . $this->company_id
         ]);
 
-        $this->link = 'http://localhost:8000/invitation/'. $invitation->id;
+        $this->link = 'http://localhost:8000/employe/invitation/'. $invitation->id;
 
         $this->dispatchBrowserEvent('saved');
     }
