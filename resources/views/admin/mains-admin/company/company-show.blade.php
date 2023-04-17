@@ -20,6 +20,7 @@
     <link href="{{ URL::asset('admin_assets/plugins/datatable/responsive.bootstrap4.min.css') }}" rel="stylesheet" />
     <!-- Slect2 css -->
     <link href="{{ URL::asset('admin_assets/plugins/select2/select2.min.css') }}" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
 
     <style>
         .bootstrap-tagsinput {
@@ -35,6 +36,36 @@
 
         .dark-mode .bootstrap-tagsinput input {
             color: rgba(255, 255, 255, 1) !important;
+        }
+
+        .coupon-row {
+            display: flex;
+            align-items: center;
+            margin: 25px auto;
+            width: fit-content;
+        }
+
+        .cpnCode {
+            border: 2px dashed #bf1c3d;
+            height: 50px;
+            width: 350px;
+            line-height: 47px;
+            letter-spacing: 2px;
+            border-right: 0;
+        }
+
+        .cpnBtn i {
+            padding-top: 14px;
+        }
+
+        .cpnBtn {
+            border: 2px solid #bf1c3d;
+            background: #bf1c3d;
+            height: 50px;
+            width: 50px;
+            line-height: 47px;
+            color: #fff;
+            cursor: pointer;
         }
     </style>
 @endsection
@@ -86,59 +117,22 @@
             </div>
         </div>
         <div class="col-9">
+            @livewire('add-invitation', ['company_id' => $company->id])
+
             @if ($message = Session::get('success'))
                 <div class="alert alert-success" role="alert"><button type="button" class="close" data-dismiss="alert"
                         aria-hidden="true">×</button>
                     <i class="fa fa-check-circle-o mr-2" aria-hidden="true"></i>{{ $message }}.
                 </div>
             @endif
-            @if (count($errors) > 0)
-                <div class="alert alert-danger">
-                    <strong>Whoops!</strong> There were some problems with your input.
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
+
             <div class="card">
                 <div class="card-header">
                     <div class="card-title">Liste des employes</div>
                     <div class="float-right ml-auto">
                         <a data-target="#modaldemo1" data-toggle="modal" class="btn btn-success">Inviter Employe</a>
-                        {{-- Modal To add employe --}}
-                        <div class="modal fade" id="modaldemo1" tabindex="-1" role="dialog"
-                            aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Ajouter Invitation</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <form action="{{ route('invitation-add') }}" method="POST">
-                                        @csrf
-                                        <input type="hidden" name='company_id' value='{{ $company->id }}'>
-                                        <div class="modal-body">
-                                            <label class="form-label d-block">Name*</label>
-                                            <input class="form-control mb-4" placeholder="Name" required type="text"
-                                                name='title' value='{{ old('title') }}'>
-                                            <label class="form-label d-block">Email*</label>
-                                            <input class="form-control mb-4" placeholder="Email" type="email" required
-                                                name='email' value='{{ old('email') }}'>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button class="btn btn-primary" type="submit">Save changes</button>
-                                            <button class="btn btn-secondary" data-dismiss="modal" aria-label="Close"
-                                                type="button">Close</button>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
                     </div>
+
                 </div>
                 <div class="card-body">
                     <div class="table-responsive mt-4">
@@ -215,6 +209,8 @@
                     </div>
                 </div>
             </div>
+
+
         </div>
     </div>
 @endsection
